@@ -43,7 +43,7 @@ let make = (~message, _children) => {
           self =>
             Js.Promise.(
               Fetch.fetchWithInit(
-                "http://localhost:3000/graphql",
+                "http://localhost:4000/graphql",
                 Fetch.RequestInit.make(
                   ~method_=Post,
                   ~body=

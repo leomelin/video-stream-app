@@ -35,9 +35,12 @@ let make = (~message, _children) => {
       ReasonReact.SideEffects(
         (
           self =>
-            Js.Global.setTimeout(
-              () => self.send(ReceiveStreamUrl("http://goatse.cx")),
-              1000,
+            Js.Promise.(
+              Fetch.fetch("http://localhost:3000/graphql?query=%7Bhello%7D")
+              |> then_(Fetch.Response.json)
+              |> then_(_rg =>
+                   resolve(self.send(ReceiveStreamUrl("http://goatse.cx")))
+                 )
             )
             |> ignore
         ),

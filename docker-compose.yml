@@ -1,7 +1,10 @@
 version: '3'
 
 services:
+  api-gateway:
+    build: video-stream-app-api-gateway/
+    ports: ['9000:9000']
   youtube-integration:
-    build: youtube-integration/
+    build: yt-integration/
     ports: [ '5000:5000' ]
     env_file: [ '.env' ]

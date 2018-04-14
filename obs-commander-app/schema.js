@@ -1,4 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
+import { startStreaming } from './functions';
 
 const typeDefs = [`
   type Tag {
@@ -73,8 +74,13 @@ const resolvers = {
       return newTag;
     },
     startStreaming: async (root, { streamKey }, context) => {
-      console.log('should start streaming');
-      return 'OK';
+      try {
+        const { result, raw } = await startStreaming();
+        console.log('Stream started', result, raw);
+        return 'OK';
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 };

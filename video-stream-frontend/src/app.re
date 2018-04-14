@@ -70,6 +70,7 @@ let make = (~message, _children) => {
           | None => ReasonReact.nullElement
           | Some(url) =>
             <div>
+              <label> (str("Stream url")) </label>
               <input
                 className="inputLink mui-textfield"
                 readOnly=Js.true_

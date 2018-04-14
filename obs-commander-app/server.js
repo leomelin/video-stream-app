@@ -7,7 +7,7 @@ import schema from './schema';
 
 const app = new koa();
 const router = new koaRouter();
-const PORT = 3000;
+const PORT = 4000;
 app.use(cors());
 
 // koaBody is needed just for POST.

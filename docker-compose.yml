@@ -1,6 +1,9 @@
 version: '3'
 
 services:
+  obs-commander:
+    build: obs-commander-app/
+    ports: ['3002:4000']
   api-gateway:
     build: video-stream-app-api-gateway/
     ports: ['9000:9000']

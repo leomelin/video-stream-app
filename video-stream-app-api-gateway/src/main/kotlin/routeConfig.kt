@@ -14,8 +14,8 @@ fun getRoutes() = listOf(
     "/ping" bind GET to { _: Request -> Response(OK).body("pong!") },
     "/youtube-integrator" bind POST to { req -> proxy(req, "http://localhost:8099") },
     "/youtube-integrator" bind GET to { req -> proxy(req, "http://localhost:8099") },
-    "/obs-commander" bind POST to { req -> proxy(req, "http://localhost:9999") },
-    "/obs-commander" bind GET to { req -> proxy(req, "http://localhost:9999") }
+    "/obs-commander" bind POST to { req -> proxy(req, "http://localhost:3002/graphql") },
+    "/obs-commander" bind GET to { req -> proxy(req, "http://localhost:3002/graphql") }
 )
 
 fun proxy(req: Request, uri: String): Response {

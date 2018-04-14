@@ -32,14 +32,40 @@ let make = (~message, _children) => {
     switch (action) {
     | CreateStream =>
       Js.Console.log("creating new stream...");
+      let payload = Js.Dict.empty();
+      Js.Dict.set(
+        payload,
+        "query",
+        Js.Json.string("mutation { startStreaming(streamKey:\"Shiiit!\") }"),
+      );
       ReasonReact.SideEffects(
         (
           self =>
             Js.Promise.(
-              Fetch.fetch("http://localhost:3000/graphql?query=%7Bhello%7D")
+              Fetch.fetchWithInit(
+                "http://localhost:3000/graphql",
+                Fetch.RequestInit.make(
+                  ~method_=Post,
+                  ~body=
+                    Fetch.BodyInit.make(
+                      Js.Json.stringify(Js.Json.object_(payload)),
+                    ),
+                  ~headers=
+                    Fetch.HeadersInit.make({
+                      "Content-Type": "application/json",
+                    }),
+                  (),
+                ),
+              )
               |> then_(Fetch.Response.json)
               |> then_(_rg =>
-                   resolve(self.send(ReceiveStreamUrl("http://goatse.cx")))
+                   resolve(
+                     self.send(
+                       ReceiveStreamUrl(
+                         "https://www.youtube.com/watch?v=_Gtc-GtLlTk",
+                       ),
+                     ),
+                   )
                  )
             )
             |> ignore

@@ -1,5 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import { startStreaming } from './functions';
+import { setYoutubeStreamKey, startStreaming } from './functions';
 
 const typeDefs = [`
   type Tag {
@@ -75,6 +75,7 @@ const resolvers = {
     },
     startStreaming: async (root, { streamKey }, context) => {
       try {
+        await setYoutubeStreamKey(streamKey);
         const { result, raw } = await startStreaming();
         console.log('Stream started', result, raw);
         return 'OK';

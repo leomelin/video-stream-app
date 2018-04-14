@@ -20,6 +20,7 @@ const typeDefs = [`
   }
   type Mutation {
     addTag(type: String!, label: String!): Tag
+    startStreaming(streamKey: String!): String
   }
   schema {
     query: Query
@@ -70,6 +71,10 @@ const resolvers = {
       };
       tags.push(label);
       return newTag;
+    },
+    startStreaming: async (root, { streamKey }, context) => {
+      console.log('should start streaming');
+      return 'OK';
     }
   }
 };

@@ -84,14 +84,14 @@ let make = (~message, _children) => {
           switch (self.state.streamState) {
           | Created =>
             <button
-              className="mui-btn mui-btn--raised mui-btn--primary"
+              className="mui-btn mui-btn--raised mui-btn--danger"
               onClick=(_e => self.send(StartPreview))>
               (str("Start preview"))
             </button>
           | Preview =>
             <div>
               <button
-                className="mui-btn mui-btn--raised mui-btn--primary"
+                className="mui-btn mui-btn--raised mui-btn--danger"
                 onClick=(_e => self.send(StartStream))>
                 (str("Start streaming"))
               </button>
@@ -100,7 +100,7 @@ let make = (~message, _children) => {
           | Streaming =>
             <div>
               <button
-                className="mui-btn mui-btn--raised mui-btn--primary"
+                className="mui-btn mui-btn--raised mui-btn--danger"
                 onClick=(_e => self.send(StopStream))>
                 (str("Stop streaming"))
               </button>

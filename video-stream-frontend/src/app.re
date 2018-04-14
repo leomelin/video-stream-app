@@ -34,20 +34,20 @@ let make = (~message, _children) => {
       Js.Console.log("creating new stream...");
       ReasonReact.SideEffects(
         (
-          self => {
+          self =>
             Js.Global.setTimeout(
               () => self.send(ReceiveStreamUrl("http://goatse.cx")),
               1000,
             )
-            |> ignore;
-          }
+            |> ignore
         ),
       );
     | ReceiveStreamUrl(url) =>
       ReasonReact.Update({streamState: Created, streamUrl: Some(url)})
     | StartPreview => ReasonReact.Update({...state, streamState: Preview})
     | StartStream => ReasonReact.Update({...state, streamState: Streaming})
-    | StopStream => ReasonReact.Update({streamState: Stopped, streamUrl: None})
+    | StopStream =>
+      ReasonReact.Update({streamState: Stopped, streamUrl: None})
     },
   render: self =>
     <div className="App">
@@ -80,48 +80,51 @@ let make = (~message, _children) => {
         )
       </div>
       <div>
-      (
-        switch (self.state.streamState) {
-        | Created =>
-          <button
-            className="mui-btn mui-btn--raised mui-btn--primary"
-            onClick=(_e => self.send(StartPreview))>
-            (str("Start preview"))
-          </button>
-        | Preview =>
-          <button
-            className="mui-btn mui-btn--raised mui-btn--primary"
-            onClick=(_e => self.send(StartStream))>
-            (str("Start streaming"))
-          </button>
-        | Streaming =>
-          <div>
+        (
+          switch (self.state.streamState) {
+          | Created =>
             <button
               className="mui-btn mui-btn--raised mui-btn--primary"
-              onClick=(_e => self.send(StopStream))>
-              (str("Stop streaming"))
+              onClick=(_e => self.send(StartPreview))>
+              (str("Start preview"))
             </button>
-            <div> (str("You are live!")) </div>
-          </div>
-        | Stopped => <div> (str("Stream stopped")) </div>
-        | _ => ReasonReact.nullElement
-        }
-      )
-    </div>
-    <div>
-      (
-        switch (self.state.streamState) {
-        | Preview
-        | Streaming =>
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/XYZ123"
-            allowFullScreen=Js.true_
-          />
-        | _ => ReasonReact.nullElement
-        }
-      )
-    </div>
-</div>,
+          | Preview =>
+            <div>
+              <button
+                className="mui-btn mui-btn--raised mui-btn--primary"
+                onClick=(_e => self.send(StartStream))>
+                (str("Start streaming"))
+              </button>
+              <div> (str("Preview")) </div>
+            </div>
+          | Streaming =>
+            <div>
+              <button
+                className="mui-btn mui-btn--raised mui-btn--primary"
+                onClick=(_e => self.send(StopStream))>
+                (str("Stop streaming"))
+              </button>
+              <div> (str("You are live!")) </div>
+            </div>
+          | Stopped => <div> (str("Stream stopped")) </div>
+          | _ => ReasonReact.nullElement
+          }
+        )
+      </div>
+      <div>
+        (
+          switch (self.state.streamState) {
+          | Preview
+          | Streaming =>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/XYZ123"
+              allowFullScreen=Js.true_
+            />
+          | _ => ReasonReact.nullElement
+          }
+        )
+      </div>
+    </div>,
 };

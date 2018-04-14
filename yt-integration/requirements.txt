@@ -1,0 +1,14 @@
+click==6.7
+Flask==0.12.2
+google-api-python-client==1.6.6
+httplib2==0.11.3
+itsdangerous==0.24
+Jinja2==2.10
+MarkupSafe==1.0
+oauth2client==4.1.2
+pyasn1==0.4.2
+pyasn1-modules==0.2.1
+rsa==3.4.2
+six==1.11.0
+uritemplate==3.0.0
+Werkzeug==0.14.1

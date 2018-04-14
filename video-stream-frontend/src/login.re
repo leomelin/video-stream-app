@@ -4,7 +4,7 @@ open Utils;
 
 [@bs.module] external logo : string = "./logo.svg";
 
-let component = ReasonReact.statelessComponent("App");
+let component = ReasonReact.statelessComponent("Login");
 
 let make = (~message, _children) => {
   ...component,

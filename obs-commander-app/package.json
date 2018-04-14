@@ -27,6 +27,7 @@
     "graphql-tools": "^2.24.0",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
+    "koa-cors": "0.0.16",
     "koa-router": "^7.4.0",
     "net": "^1.0.2",
     "node-osascript": "^2.0.0",
